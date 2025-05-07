@@ -16,6 +16,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+    image: thaboxanx/order-backend:latest
     ports:
       - "8080:8080"
     depends_on:
@@ -29,6 +30,7 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile
+    image: thaboxanx/order-frontend:latest
     ports:
       - "80:80"
     depends_on:
