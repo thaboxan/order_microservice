@@ -2,16 +2,17 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 
-# Install build dependencies
-RUN apk add --no-cache python3 make gcc g++
+# Copy package files
+COPY package.json yarn.lock* ./
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install --platform=linux-x64
+# Install dependencies
+RUN yarn install --frozen-lockfile
 
-# Copy project files and build
+# Copy source code
 COPY . .
-RUN npm run build
+
+# Build the application
+RUN yarn build
 
 # Production stage
 FROM nginx:alpine
