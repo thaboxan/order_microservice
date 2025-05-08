@@ -21,12 +21,13 @@ pipeline {
             }
         }
         
-        stage('Frontend: Build and Test') {
+        stage('Frontend: Install and Test') {
             steps {
                 dir('frontend') {
-                    sh 'npm install'
-                    sh 'npm run test'
-                    sh 'npm run build'
+                    sh 'yarn install --frozen-lockfile'
+                    sh 'yarn lint'
+                    sh 'yarn test'
+                    sh 'yarn build'
                 }
             }
         }
